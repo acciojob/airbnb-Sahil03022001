@@ -13,7 +13,7 @@ public class HotelManagementRepo {
     HashMap<String, Hotel> hotelDb = new HashMap<>();
     HashMap<Integer, User> userDb = new HashMap<>();
     HashMap<String, Booking> bookingDb = new HashMap<>();
-    HashMap<String, List<Booking>> personBookingsList = new HashMap<>();
+    HashMap<Integer, List<Booking>> personBookingsList = new HashMap<>();
 
     public Integer addUser(User user) {
         userDb.put(user.getaadharCardNo(), user);
@@ -62,12 +62,12 @@ public class HotelManagementRepo {
 
         bookingDb.put(bookingId, booking);
 
-        String personName = booking.getBookingPersonName();
-        if(!personBookingsList.containsKey(personName)) {
-            personBookingsList.put(personName, new ArrayList<>());
+        int aadharNumber = booking.getBookingAadharCard();
+        if(!personBookingsList.containsKey(aadharNumber)) {
+            personBookingsList.put(aadharNumber, new ArrayList<>());
         }
 
-        personBookingsList.get(personName).add(booking);
+        personBookingsList.get(aadharNumber).add(booking);
 
         return totalPrice;
     }
@@ -87,7 +87,6 @@ public class HotelManagementRepo {
                 facilities.add(facility);
             }
         }
-
         return hotel;
     }
 }
